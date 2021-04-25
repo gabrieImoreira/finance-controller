@@ -35,7 +35,9 @@ public class CategoryResource {
         return ResponseEntity.created(uri).body(savedCategory);
     }
     @GetMapping("/{id}")
-    public Optional<Category> findById(@PathVariable Long id){
-        return categoryRepository.findById(id);
+    public ResponseEntity<?> findById(@PathVariable Long id){
+        Optional<Category> savedId = categoryRepository.findById(id);
+
+        return !savedId.isEmpty() ? ResponseEntity.ok(savedId) : ResponseEntity.notFound().build();
     }
 }
