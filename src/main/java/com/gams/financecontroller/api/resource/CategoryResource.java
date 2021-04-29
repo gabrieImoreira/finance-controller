@@ -35,6 +35,7 @@ public class CategoryResource {
 
         return ResponseEntity.created(uri).body(savedCategory);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Long id){
         Optional<Category> savedId = categoryRepository.findById(id);

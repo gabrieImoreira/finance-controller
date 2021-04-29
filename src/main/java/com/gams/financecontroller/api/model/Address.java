@@ -5,21 +5,21 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Address {
 
-    private String publicArea; //logradouro
+    private String publicarea; //logradouro
     private String number;
     private String complement;
     private String district; //bairro
-    private String zipCode; //cep
+    private String zipcode; //cep
     private String city;
     private String state;
 
 
-    public String getPublicArea() {
-        return publicArea;
+    public String getPublicarea() {
+        return publicarea;
     }
 
-    public void setPublicArea(String publicArea) {
-        this.publicArea = publicArea;
+    public void setPublicarea(String publicarea) {
+        this.publicarea = publicarea;
     }
 
     public String getNumber() {
@@ -47,11 +47,11 @@ public class Address {
     }
 
     public String getZipCode() {
-        return zipCode;
+        return zipcode;
     }
 
     public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
+        this.zipcode = zipCode;
     }
 
     public String getCity() {
