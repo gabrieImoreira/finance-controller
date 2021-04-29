@@ -1,16 +1,43 @@
 package com.gams.financecontroller.api.model;
 
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Embeddable
 public class Address {
 
+    @NotEmpty
+    @NotNull
+    @Size(min = 2, max = 150)
     private String publicarea; //logradouro
+
+    @NotEmpty
+    @NotNull
+    @Size(min = 2, max = 150)
     private String number;
+
     private String complement;
+
+    @NotEmpty
+    @NotNull
+    @Size(min = 2, max = 150)
     private String district; //bairro
+
+    @NotEmpty
+    @NotNull
+    @Size(min = 2, max = 150)
     private String zipcode; //cep
+
+    @NotEmpty
+    @NotNull
+    @Size(min = 2, max = 150)
     private String city;
+
+    @NotEmpty
+    @NotNull
+    @Size(min = 2, max = 150)
     private String state;
 
 
