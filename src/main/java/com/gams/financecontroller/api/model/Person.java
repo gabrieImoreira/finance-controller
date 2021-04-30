@@ -21,7 +21,6 @@ public class Person {
     private String name;
 
     @Embedded
-    @Valid
     private Address address;
 
     @NotNull
