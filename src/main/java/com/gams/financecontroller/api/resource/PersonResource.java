@@ -41,4 +41,10 @@ public class PersonResource {
         publisher.publishEvent(new ResourceCreatedEvent(this, response, savedPerson.getId())); //event -> explication at my private git ;)
         return ResponseEntity.status(HttpStatus.CREATED).body(savedPerson);
     }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        personRepository.deleteById(id);
+    }
+
 }
