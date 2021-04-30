@@ -1,6 +1,7 @@
 package com.gams.financecontroller.api.model;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -20,6 +21,7 @@ public class Person {
     private String name;
 
     @Embedded
+    @Valid
     private Address address;
 
     @NotNull
