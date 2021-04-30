@@ -1,13 +1,13 @@
 CREATE TABLE person (
     id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50) NOT NULL,
-    publicarea VARCHAR(30) NOT NULL,
-    number INT(30) NOT NULL,
+    publicarea VARCHAR(30),
+    number INT(30),
     complement VARCHAR(30),
-    district VARCHAR(30) NOT NULL,
-    zipcode VARCHAR(30) NOT NULL,
-    city VARCHAR(30) NOT NULL,
-    state VARCHAR(30) NOT NULL,
+    district VARCHAR(30),
+    zipcode VARCHAR(30),
+    city VARCHAR(30),
+    state VARCHAR(30),
     active BOOLEAN NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
