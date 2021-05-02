@@ -30,7 +30,7 @@ public class FinanceControllerExceptionHandler extends ResponseEntityExceptionHa
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
                                                                   HttpHeaders headers, HttpStatus status, WebRequest request) {
         String msgUser = "Mensagem inválida";
-        String msgDev = ex.getCause().toString();
+        String msgDev = ex.getCause() != null ? ex.getCause().toString() : ex.toString();
         return handleExceptionInternal(ex, new Error(msgUser, msgDev), headers, HttpStatus.BAD_REQUEST, request);
     }
 
