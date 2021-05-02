@@ -3,8 +3,10 @@ package com.gams.financecontroller.api.resource;
 import com.gams.financecontroller.api.event.ResourceCreatedEvent;
 import com.gams.financecontroller.api.model.Person;
 import com.gams.financecontroller.api.repository.PersonRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
@@ -47,4 +50,15 @@ public class PersonResource {
         personRepository.deleteById(id);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<?> att(@PathVariable Long id, @Valid @RequestBody Person person) {
+        try {
+            Person savedPerson = personRepository.findById(id).get();
+            BeanUtils.copyProperties(person, savedPerson, "id");
+            personRepository.save(savedPerson);
+            return ResponseEntity.ok(savedPerson);
+        }catch (NoSuchElementException ex) {
+            throw new EmptyResultDataAccessException(1);
+        }
+    }
 }

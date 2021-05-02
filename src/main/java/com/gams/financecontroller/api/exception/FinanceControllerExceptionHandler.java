@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @ControllerAdvice
 public class FinanceControllerExceptionHandler extends ResponseEntityExceptionHandler {
@@ -72,7 +73,7 @@ public class FinanceControllerExceptionHandler extends ResponseEntityExceptionHa
 
     @ExceptionHandler({EmptyResultDataAccessException.class})
     public ResponseEntity<Object> handleEmptyResultDataAccessException(EmptyResultDataAccessException ex, WebRequest request) {
-        String msgUser = "Não é possível excluir esse item, pois ele não existe.";
+        String msgUser = "Não é possível modificar esse item, pois ele não existe.";
         //String msgDev = ex.getCause().toString(); NO NEED GET CAUSE -> IN THIS CASE, THE EXCEPTION IS ALREADY THE CAUSE
         String msgDev = ex.toString();
         return handleExceptionInternal(ex, new Error(msgUser, msgDev),new HttpHeaders(), HttpStatus.NOT_FOUND, request);

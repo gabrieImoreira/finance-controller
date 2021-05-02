@@ -1,9 +1,6 @@
 package com.gams.financecontroller.api.model;
 
 import javax.persistence.Embeddable;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Embeddable
 public class Address {

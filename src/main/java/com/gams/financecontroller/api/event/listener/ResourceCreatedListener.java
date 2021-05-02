@@ -2,7 +2,6 @@ package com.gams.financecontroller.api.event.listener;
 
 import com.gams.financecontroller.api.event.ResourceCreatedEvent;
 import org.springframework.context.ApplicationListener;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
