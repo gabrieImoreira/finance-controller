@@ -3,6 +3,7 @@ package com.gams.financecontroller.api.resource;
 import com.gams.financecontroller.api.event.ResourceCreatedEvent;
 import com.gams.financecontroller.api.model.Person;
 import com.gams.financecontroller.api.repository.PersonRepository;
+import com.gams.financecontroller.api.service.PersonService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
@@ -26,6 +27,9 @@ public class PersonResource {
 
     @Autowired
     private ApplicationEventPublisher publisher;
+
+    @Autowired
+    private PersonService service;
 
     @GetMapping
     public List<Person> listAll(){
@@ -52,13 +56,7 @@ public class PersonResource {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> att(@PathVariable Long id, @Valid @RequestBody Person person) {
-        try {
-            Person savedPerson = personRepository.findById(id).get();
-            BeanUtils.copyProperties(person, savedPerson, "id");
-            personRepository.save(savedPerson);
-            return ResponseEntity.ok(savedPerson);
-        }catch (NoSuchElementException ex) {
-            throw new EmptyResultDataAccessException(1);
-        }
+        Person savedPerson = service.update(person, id);
+        return ResponseEntity.ok(savedPerson);
     }
 }
