@@ -3,6 +3,7 @@ package com.gams.financecontroller.api.resource;
 import com.gams.financecontroller.api.event.ResourceCreatedEvent;
 import com.gams.financecontroller.api.model.Category;
 import com.gams.financecontroller.api.repository.CategoryRepository;
+import com.gams.financecontroller.api.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,9 @@ public class CategoryResource {
 
     @Autowired
     private ApplicationEventPublisher publisher;
+
+    @Autowired
+    private CategoryService service;
 
     @GetMapping
     public List<Category> listAll(){
@@ -47,5 +51,11 @@ public class CategoryResource {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         categoryRepository.deleteById(id);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> att(@PathVariable Long id, @Valid @RequestBody Category category) {
+        Category savedCategory = service.update(category, id);
+        return ResponseEntity.ok(savedCategory);
     }
 }
