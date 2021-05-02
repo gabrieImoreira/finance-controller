@@ -15,14 +15,24 @@ public class PersonService {
     @Autowired
     private PersonRepository personRepository;
 
-    public Person update(Person person, Long id) {
+    public Person search(Long id){
         try {
             Person savedPerson = personRepository.findById(id).get();
-            BeanUtils.copyProperties(person, savedPerson, "id");
-            return personRepository.save(savedPerson);
+            return savedPerson;
         }catch (NoSuchElementException ex) {
             throw new EmptyResultDataAccessException(1);
         }
+    }
 
+    public Person update(Person person, Long id) {
+        Person savedPerson = search(id);
+        BeanUtils.copyProperties(person, savedPerson, "id");
+        return personRepository.save(savedPerson);
+    }
+
+    public void attPropertyActive(Long id, Boolean active) {
+        Person savedPerson = search(id);
+        savedPerson.setActive(active);
+        personRepository.save(savedPerson);
     }
 }
