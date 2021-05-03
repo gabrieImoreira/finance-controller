@@ -39,7 +39,7 @@ public class InputResource {
     @PostMapping
     public ResponseEntity<Input> create(@Valid @RequestBody Input input, HttpServletResponse response){
         Input savedInput = inputRepository.save(input);
-        publisher.publishEvent(new ResourceCreatedEvent(this, response, savedInput.getId())); 
+        publisher.publishEvent(new ResourceCreatedEvent(this, response, savedInput.getId()));
         return ResponseEntity.status(HttpStatus.CREATED).body(savedInput);
     }
 

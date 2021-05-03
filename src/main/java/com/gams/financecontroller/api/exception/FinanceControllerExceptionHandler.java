@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.orm.jpa.JpaObjectRetrievalFailureException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -78,4 +79,12 @@ public class FinanceControllerExceptionHandler extends ResponseEntityExceptionHa
         String msgDev = ex.toString();
         return handleExceptionInternal(ex, new Error(msgUser, msgDev),new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
+
+    @ExceptionHandler({JpaObjectRetrievalFailureException.class})
+    public ResponseEntity<Object> handleIllegalStateException(JpaObjectRetrievalFailureException ex, WebRequest request) {
+        String msgUser = "Operação não permitida";
+        String msgDev = ex.getCause() != null ? ex.getCause().toString() : ex.toString();
+        return handleExceptionInternal(ex, new Error(msgUser, msgDev),new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+    }
 }
+
