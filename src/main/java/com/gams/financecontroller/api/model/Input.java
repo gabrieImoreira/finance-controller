@@ -1,6 +1,8 @@
 package com.gams.financecontroller.api.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -14,22 +16,27 @@ public class Input {
     private Long id;
     private String description;
 
+    @NotNull
     @Column(name = "dt_due")
     private LocalDate dataDue;
 
     @Column(name = "dt_payment")
     private LocalDate dataPayment;
 
+    @NotNull
     private BigDecimal value;
     private String observation;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     private ReleaseType type;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "id_category")
     private Category category;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "id_person")
     private Person person;
