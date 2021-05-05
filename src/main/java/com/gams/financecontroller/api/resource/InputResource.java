@@ -3,13 +3,12 @@ package com.gams.financecontroller.api.resource;
 import com.gams.financecontroller.api.event.ResourceCreatedEvent;
 import com.gams.financecontroller.api.exception.FinanceControllerExceptionHandler;
 import com.gams.financecontroller.api.model.Input;
-import com.gams.financecontroller.api.model.Person;
 import com.gams.financecontroller.api.repository.InputRepository;
+import com.gams.financecontroller.api.repository.filter.FilterInput;
 import com.gams.financecontroller.api.service.InputService;
 import com.gams.financecontroller.api.service.exception.PersonNonEnexistentOrInactiveExpection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +16,6 @@ import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -36,8 +34,8 @@ public class InputResource {
     private ApplicationEventPublisher publisher;
 
     @GetMapping
-    public List<Input> listAll(){
-        return inputRepository.findAll();
+    public List<Input> search(FilterInput filterInput){
+        return inputRepository.filter(filterInput);
     }
 
     @GetMapping("/{id}")
