@@ -44,6 +44,12 @@ public class InputResource {
         return !savedId.isEmpty() ? ResponseEntity.ok(savedId) : ResponseEntity.notFound().build();
     }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        inputRepository.deleteById(id);
+    }
+
     @PostMapping
     public ResponseEntity<Input> create(@Valid @RequestBody Input input, HttpServletResponse response){
         Input savedInput = service.save(input);

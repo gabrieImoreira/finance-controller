@@ -66,6 +66,5 @@ public class PersonResource {
     public void attPropertyActive(@PathVariable Long id, @RequestBody Boolean active){
         service.attPropertyActive(id, active);
 
-
     }
 }
