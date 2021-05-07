@@ -9,6 +9,8 @@ import com.gams.financecontroller.api.service.InputService;
 import com.gams.financecontroller.api.service.exception.PersonNonEnexistentOrInactiveExpection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,8 +36,8 @@ public class InputResource {
     private ApplicationEventPublisher publisher;
 
     @GetMapping
-    public List<Input> search(FilterInput filterInput){
-        return inputRepository.filter(filterInput);
+    public Page<Input> search(FilterInput filterInput, Pageable pageable){
+        return inputRepository.filter(filterInput, pageable);
     }
 
     @GetMapping("/{id}")
